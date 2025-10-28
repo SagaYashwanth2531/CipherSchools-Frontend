@@ -54,12 +54,15 @@ export const api = axios.create({
   withCredentials: false
 });
 
+console.log('API Base URL:', `${getInitialBaseUrl()}/api`);
+
 api.interceptors.request.use((config: InternalAxiosRequestConfig) => {
   const t = getToken();
   if (t) {
     config.headers = config.headers || {};
     config.headers['Authorization'] = `Bearer ${t}`;
   }
+  console.log('Making API request to:', config.url);
   return config;
 });
 
@@ -93,6 +96,12 @@ async function discoverAndSetBaseUrl(): Promise<string | null> {
 
 let isDiscovering = false;
 api.interceptors.response.use(undefined, async (error: AxiosError) => {
+  console.error('API Error:', {
+    message: error.message,
+    url: error.config?.url,
+    status: error.response?.status,
+    data: error.response?.data
+  });
   // Retry once after discovery if network error (no response)
   const original = error.config as (InternalAxiosRequestConfig & { _retried?: boolean }) | undefined;
   const isNetwork = !error.response; // CORS/connection issues
