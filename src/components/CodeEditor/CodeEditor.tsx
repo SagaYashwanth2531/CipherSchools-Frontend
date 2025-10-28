@@ -158,7 +158,6 @@ export function CodeEditor({ className }: CodeEditorProps) {
               quickSuggestions: true,
               suggestSelection: 'first',
               autoIndent: 'full',
-              bracketPairColorization: true,
               guides: {
                 bracketPairs: true,
                 indentation: true,
