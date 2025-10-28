@@ -1,0 +1,151 @@
+.container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  pointer-events: none;
+}
+
+.toast {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(10px);
+  border: 1px solid;
+  min-width: 300px;
+  max-width: 400px;
+  pointer-events: auto;
+  animation: slideIn 0.3s ease-out;
+  position: relative;
+  overflow: hidden;
+}
+
+.toast::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+  opacity: 0.8;
+}
+
+.toast > * {
+  position: relative;
+  z-index: 1;
+}
+
+.icon {
+  font-size: 20px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.content {
+  flex: 1;
+  min-width: 0;
+}
+
+.title {
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 4px;
+  line-height: 1.4;
+}
+
+.message {
+  font-size: 13px;
+  opacity: 0.9;
+  line-height: 1.4;
+  word-wrap: break-word;
+}
+
+.closeButton {
+  width: 20px;
+  height: 20px;
+  border: none;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+  opacity: 0.7;
+}
+
+.closeButton:hover {
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Toast types */
+.success {
+  background: rgba(76, 175, 80, 0.9);
+  border-color: rgba(76, 175, 80, 0.3);
+  color: white;
+}
+
+.error {
+  background: rgba(244, 67, 54, 0.9);
+  border-color: rgba(244, 67, 54, 0.3);
+  color: white;
+}
+
+.warning {
+  background: rgba(255, 152, 0, 0.9);
+  border-color: rgba(255, 152, 0, 0.3);
+  color: white;
+}
+
+.info {
+  background: rgba(33, 150, 243, 0.9);
+  border-color: rgba(33, 150, 243, 0.3);
+  color: white;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideOut {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .container {
+    top: 10px;
+    right: 10px;
+    left: 10px;
+  }
+  
+  .toast {
+    min-width: auto;
+    max-width: none;
+  }
+}

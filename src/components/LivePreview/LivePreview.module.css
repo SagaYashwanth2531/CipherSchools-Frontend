@@ -1,0 +1,242 @@
+.livePreview {
+  height: 100%;
+  width: 100%;
+  background: var(--preview-bg);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Removed header to maximize preview area */
+
+.headerLeft {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.previewIcon {
+  font-size: 16px;
+}
+
+.previewTitle {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.headerRight {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.statusIndicator {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.statusDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--success-color);
+  animation: pulse 2s infinite;
+}
+
+.statusText {
+  font-size: 12px;
+}
+
+.viewportControls {
+  display: flex;
+  gap: 4px;
+}
+
+.viewportButton {
+  background: var(--button-bg);
+  border: 1px solid var(--border-color);
+  color: var(--text-color);
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.viewportButton:hover {
+  background: var(--button-hover-bg);
+  border-color: var(--accent-color);
+}
+
+.viewportButton.active {
+  background: var(--accent-color);
+  border-color: var(--accent-color);
+  color: white;
+}
+
+.previewContent {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  min-height: 0;
+}
+
+/* Hide the "Open in CodeSandbox" button */
+.livePreview :global(.sp-preview-actions) {
+  display: none !important;
+}
+
+.livePreview :global(.sp-preview-container) {
+  height: 100% !important;
+  width: 100% !important;
+}
+
+.livePreview :global(.sp-preview-iframe) {
+  height: 100% !important;
+  width: 100% !important;
+  border: none !important;
+}
+
+/* Force-hide any Sandpack editor elements to keep preview-only */
+.livePreview :global(.sp-editor),
+.livePreview :global(.sp-code-editor),
+.livePreview :global([class*="sp-code-editor"]) {
+  display: none !important;
+  height: 0 !important;
+  min-height: 0 !important;
+}
+
+.livePreview :global(.sp-wrapper) {
+  height: 100% !important;
+}
+
+.livePreview :global(.sp-layout) {
+  height: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+/* Hide refresh button */
+.livePreview :global([data-id="refresh"]) {
+  display: none !important;
+}
+
+.emptyState {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px;
+  color: var(--text-secondary);
+}
+
+.emptyIcon {
+  font-size: 48px;
+  margin-bottom: 16px;
+}
+
+.emptyTitle {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-color);
+  margin-bottom: 8px;
+}
+
+.emptyText {
+  font-size: 14px;
+  opacity: 0.8;
+  max-width: 300px;
+  line-height: 1.5;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Override Sandpack Preview styles */
+.livePreview :global(.sp-preview) {
+  height: 100% !important;
+  border: none !important;
+}
+
+.livePreview :global(.sp-preview-iframe) {
+  height: 100% !important;
+  border: none !important;
+}
+
+.livePreview :global(.sp-preview-actions) {
+  background: var(--preview-header-bg) !important;
+  border-bottom: 1px solid var(--border-color) !important;
+}
+
+.livePreview :global(.sp-preview-actions button) {
+  background: var(--button-bg) !important;
+  color: var(--text-color) !important;
+  border: 1px solid var(--border-color) !important;
+}
+
+.livePreview :global(.sp-preview-actions button:hover) {
+  background: var(--button-hover-bg) !important;
+  border-color: var(--button-hover-border) !important;
+}
+
+/* Dark theme */
+.dark {
+  --preview-bg: #1e1e1e;
+  --preview-header-bg: #2d2d30;
+  --border-color: #3e3e42;
+  --text-color: #cccccc;
+  --text-secondary: #969696;
+  --success-color: #4caf50;
+  --button-bg: #3c3c3c;
+  --button-hover-bg: #464647;
+  --button-hover-border: #5a5a5a;
+  --accent-color: #007acc;
+}
+
+/* Light theme */
+.light {
+  --preview-bg: #ffffff;
+  --preview-header-bg: #f8f9fa;
+  --border-color: #e1e5e9;
+  --text-color: #24292e;
+  --text-secondary: #656d76;
+  --success-color: #28a745;
+  --button-bg: #f6f8fa;
+  --button-hover-bg: #e1e5e9;
+  --button-hover-border: #d0d7de;
+  --accent-color: #3b82f6;
+}
+
+@media (max-width: 768px) {
+  .previewHeader {
+    padding: 0 12px;
+  }
+  
+  .previewTitle {
+    font-size: 13px;
+  }
+  
+  .statusText {
+    display: none;
+  }
+}
