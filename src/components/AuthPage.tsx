@@ -27,7 +27,10 @@ export function AuthPage() {
 			}
 			window.location.href = '/';
 		} catch (err: any) {
-			setError(err?.response?.data?.message || 'Authentication failed');
+			console.error('Auth error:', err);
+			const errorMessage = err?.response?.data?.message || err?.message || 'Authentication failed';
+			const errorDetails = err?.response?.data?.details ? JSON.stringify(err.response.data.details) : '';
+			setError(errorMessage + (errorDetails ? ` - ${errorDetails}` : ''));
 		} finally {
 			setLoading(false);
 		}

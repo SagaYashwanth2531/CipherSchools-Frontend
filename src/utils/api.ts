@@ -118,13 +118,23 @@ export async function ensureAuth(): Promise<void> {
 }
 
 export async function authRegister(username: string, email: string, password: string): Promise<void> {
-  const { data } = await api.post('/auth/register', { username, email, password });
-  setToken(data.token);
+  try {
+    const { data } = await api.post('/auth/register', { username, email, password });
+    setToken(data.token);
+  } catch (error: any) {
+    console.error('Register error:', error.response?.data || error.message);
+    throw error;
+  }
 }
 
 export async function authLogin(emailOrUsername: string, password: string): Promise<void> {
-  const { data } = await api.post('/auth/login', { emailOrUsername, password });
-  setToken(data.token);
+  try {
+    const { data } = await api.post('/auth/login', { emailOrUsername, password });
+    setToken(data.token);
+  } catch (error: any) {
+    console.error('Login error:', error.response?.data || error.message);
+    throw error;
+  }
 }
 
 export async function authMe(): Promise<{ id: string; username: string; email: string } | null> {
