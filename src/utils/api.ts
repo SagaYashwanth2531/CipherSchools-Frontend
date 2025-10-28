@@ -33,7 +33,11 @@ function normalizeBaseUrl(url: string): string {
 function getInitialBaseUrl(): string {
   const fromEnv = ENV_BASE_URL ? normalizeBaseUrl(ENV_BASE_URL) : null;
   const fromSaved = getSavedBaseUrl() ? normalizeBaseUrl(getSavedBaseUrl() as string) : null;
-  return fromEnv || fromSaved || 'http://localhost:8080';
+  const finalUrl = fromEnv || fromSaved || 'https://cipherschools-backend-4kro.onrender.com';
+  console.log('[API Config] ENV_BASE_URL:', ENV_BASE_URL);
+  console.log('[API Config] fromEnv:', fromEnv);
+  console.log('[API Config] Final URL:', finalUrl);
+  return finalUrl;
 }
 
 let token: string | null = null;
